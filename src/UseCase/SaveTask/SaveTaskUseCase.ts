@@ -2,14 +2,14 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Task } from '@prisma/client';
 import { UseCase } from '../../index';
 import SaveTaskDto from './SaveTaskDto';
-//Import pour utiliser la méthode qui sauvergarde une tâche
+//Import du dossier TaskRepository (=> qui intéragit avec BDD) pour récupérer les données envoyées par la BDD
 import TaskRepository from 'src/Repositories/TaskRepository';
 
 @Injectable()
 export default class SaveTaskUseCase
   implements UseCase<Promise<Task>, [dto: SaveTaskDto]>
 {
-  //Ajout dans le constructeur de l'instance TakeRepository pour effectuer des opérations dans la BDD
+  //Ajout dans le constructeur de l'instance TakeRepository pour récupérer les données
   constructor(private readonly taskRepository: TaskRepository) {}
 
   async handle(dto: SaveTaskDto) {
